@@ -32,4 +32,13 @@ public class MemberEntity {
         memberEntity.setMemberName(MemberDTO.getMemberName());
         return memberEntity;
     }
+
+    public static MemberEntity toUpdateMemberEntity(MemberDTO MemberDTO){
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setId(MemberDTO.getId());
+        memberEntity.setMemberEmail(MemberDTO.getMemberEmail());
+        memberEntity.setMemberPassword(MemberDTO.getMemberPassword());
+        memberEntity.setMemberName(MemberDTO.getMemberName());
+        return memberEntity;
+    }
 }
