@@ -67,6 +67,7 @@ public class BoardService {
 
         //board는 boardEntity의 객체(매개변수) BoardDTO의 형태로 옴겨담아줌
         Page<BoardDTO> boardDTOS = boardEntities.map(board -> new BoardDTO(board.getId(), board.getBoardWriter(), board.getBoardTitle(), board.getBoardHits(), board.getCreatedTime()));
+
         return boardDTOS;
     }
 }
