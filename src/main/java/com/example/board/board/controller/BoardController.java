@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -26,7 +27,7 @@ public class BoardController {
     }
 
     @PostMapping("/board/save")
-    public String save(@ModelAttribute BoardDTO boardDTO) { //Spring에서 save에있는 name태그에 사용된 필드명과 DTO객체내에 필드명이 같은것끼리 setter에 값을 알아서 넣어줌
+    public String save(@ModelAttribute BoardDTO boardDTO) throws IOException { //Spring에서 save에있는 name태그에 사용된 필드명과 DTO객체내에 필드명이 같은것끼리 setter에 값을 알아서 넣어줌
         boardService.save(boardDTO);
         return "index";
     }

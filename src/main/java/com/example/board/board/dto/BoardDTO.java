@@ -4,7 +4,9 @@ package com.example.board.board.dto;
 import com.example.board.board.entity.BaseEntity;
 import com.example.board.board.entity.BoardEntity;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.print.Pageable;
 import java.time.LocalDateTime;
 
 //DTO(Data Transfer Object),데이터를 전송할때 사용하는 객체
@@ -22,6 +24,10 @@ public class BoardDTO {
     private int boardHits;
     private LocalDateTime boardCreatedTime;
     private LocalDateTime boardUpdatedTime;
+    private MultipartFile boardFile;
+    private String originalFileName; //원본 파일이름
+    private String storedFileName; // 서버 저장용 파일 이름 (서버측에서 이름중복을 구분해주기위한 용도)
+    private int fileAttached; //파일 첨부 여부
 
     public BoardDTO(Long id, String boardWriter, String boardTitle, int boardHits, LocalDateTime boardCreatedTime) {
         this.id = id;
@@ -41,6 +47,15 @@ public class BoardDTO {
         boardDTO.setBoardHits(boardEntity.getBoardHits());
         boardDTO.setBoardCreatedTime(boardEntity.getCreatedTime());
         boardDTO.setBoardUpdatedTime(boardEntity.getUpdatedTime());
+        if(boardEntity.getFileAttached() == 0){
+            boardDTO.setFileAttached(boardEntity.getFileAttached());
+        } else {
+            boardDTO.setFileAttached(boardEntity.getFileAttached());
+            // originalFileName , storedFileName : board_file_talbe에 존재한다 , 하지만 매개변수는 boardEntity임
+            // 이런문제를 jpa에서 해결할수있는방법이있음 ( 원래는 조인을 해야지만)
+            boardDTO.setOriginalFileName(boardEntity.getBoardFileEntityList().get(0).getOriginalFileName());
+            boardDTO.setStoredFileName(boardEntity.getBoardFileEntityList().get(0).getStoredFileName());
+        }
         return boardDTO;
     }
 }
