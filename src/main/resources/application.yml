@@ -5,7 +5,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/money_db?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/db_member?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: user_tuto
     password: 1234
   thymeleaf:
